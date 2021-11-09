@@ -71,7 +71,6 @@ StyleCopReport.xml
 *.obj
 *.iobj
 *.pch
-*.pdb
 *.ipdb
 *.pgc
 *.pgd
@@ -146,7 +145,7 @@ nCrunchTemp_*
 
 # MightyMoose
 *.mm.*
-AutoTest.Net/
+AutoTest./
 
 # Web workbench (sass)
 .sass-cache/
