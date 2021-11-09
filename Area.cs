@@ -38,6 +38,19 @@ namespace SpaceCat
             AdditionalNotes = null;
         }
 
+        public Area(string color)
+        {
+            AreaFloor = null;
+            Capacity = 0;
+            AreaID = 0;
+            AreaName = null;
+            DefiningRectangles = new List<Rectangle>();
+            Color = color;
+            Tags = new List<string>();
+            ContainedFurniture = new List<Furniture>();
+            AdditionalNotes = null;
+        }
+
         public void AddFurniture(Furniture furniturePiece)
         {
             Capacity += furniturePiece.Seating;
