@@ -458,7 +458,7 @@ namespace SpaceCat
                 }
 
                 //create file at specified filepath in connectionString
-                SQLiteConnection.CreateFile(GetFolderName() + filename);
+                SQLiteConnection.CreateFile(tempPath + filename);
                 Console.WriteLine("New File has been created.");
             }
             else
