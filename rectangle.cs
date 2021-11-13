@@ -44,6 +44,9 @@ namespace SpaceCat
             {
                 throw new Exception("Rectangle can not have identical y values");
             }
+
+            TopLeft = new Tuple<double, double>(top_left_x, top_left_y);
+            BottomRight = new Tuple<double, double>(bottom_right_x, bottom_right_y);
         }
     }
 }
