@@ -43,7 +43,7 @@
     }
   },
   "libraries": {
-    "SpaceCat/0.1.0": {
+    "SpaceCat/0.1.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
