@@ -13,7 +13,7 @@ namespace SpaceCat
     public class DatabaseFactory
     {
         //grabs the file path that the .exe is currently running in
-        private readonly String BaseFilePath = AppDomain.CurrentDomain.BaseDirectory;
+        private readonly String BaseFilePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
         //a string to be constructed as to connect to the database
         private String ConstructedFilePath;
@@ -458,7 +458,7 @@ namespace SpaceCat
                 }
 
                 //create file at specified filepath in connectionString
-                SQLiteConnection.CreateFile(GetFolderName() + filename);
+                SQLiteConnection.CreateFile(tempPath + filename);
                 Console.WriteLine("New File has been created.");
             }
             else
