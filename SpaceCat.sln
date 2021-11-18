@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceCat", "SpaceCat.csproj", "{E82D5F95-A455-4E83-8224-AE69A46F1BEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceCat", "SCUL\SpaceCat.csproj", "{766B927B-A593-4CE0-94AD-1FBEDCC68311}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCUL_unit_tests", "SCUL_unit_tests\SCUL_unit_tests.csproj", "{D5CD7169-5024-4499-AC5D-9161BDACF304}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E82D5F95-A455-4E83-8224-AE69A46F1BEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E82D5F95-A455-4E83-8224-AE69A46F1BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E82D5F95-A455-4E83-8224-AE69A46F1BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E82D5F95-A455-4E83-8224-AE69A46F1BEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{766B927B-A593-4CE0-94AD-1FBEDCC68311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{766B927B-A593-4CE0-94AD-1FBEDCC68311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{766B927B-A593-4CE0-94AD-1FBEDCC68311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{766B927B-A593-4CE0-94AD-1FBEDCC68311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5CD7169-5024-4499-AC5D-9161BDACF304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5CD7169-5024-4499-AC5D-9161BDACF304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5CD7169-5024-4499-AC5D-9161BDACF304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5CD7169-5024-4499-AC5D-9161BDACF304}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
