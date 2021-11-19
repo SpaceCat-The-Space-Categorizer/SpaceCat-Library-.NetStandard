@@ -17,7 +17,7 @@ namespace SpaceCat
         public Building(string name)
         {
             Name = name;
-            DateCreated = new DateTime();
+            DateCreated = DateTime.Now;
             Floors = new List<Floor>();
             FurniturePresets = new List<FurnitureBlueprint>();
             DatabaseHandler = new DatabaseFactory(name);
@@ -27,13 +27,13 @@ namespace SpaceCat
         public void AddFloor(Floor newFloor)
         {
             Floors.Add(newFloor);
-            newFloor.floorBuilding = this;
+            newFloor.FloorBuilding = this;
         }
 
         public void RemoveFloor(Floor removedFloor)
         {
             Floors.Remove(removedFloor);
-            removedFloor.floorBuilding = null;
+            removedFloor.FloorBuilding = null;
         }
 
         public void AddFurniturePreset(FurnitureBlueprint newPreset)

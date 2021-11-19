@@ -19,30 +19,31 @@ namespace SpaceCat
         //Stores the default settings of this type of furniture
 
         //The number of seats this piece of furniture has by default
+        private int _Seating;
         public int Seating
         {
             get
             {
-                return Seating;
+                return _Seating;
             }
             set
             {
                 if (value <= 0) throw new Exception("Invalid Seating Argument");
-                else Seating = value;
+                else _Seating = value;
             }
         }
 
         //Constructor
         public FurnitureBlueprint(string filepath, int seating)
         {
-            this.Filepath = filepath;
-            this.Seating = seating;
+            Filepath = filepath;
+            Seating = seating;
         }
 
         //Call this function to return a new instance of this type of furniture
         public Furniture NewInstance()
         {
-            return new Furniture(this.Filepath, this.Seating);
+            return new Furniture(Filepath, Seating);
         }
 
     }
