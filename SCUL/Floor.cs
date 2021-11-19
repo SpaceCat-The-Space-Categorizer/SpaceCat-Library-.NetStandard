@@ -5,17 +5,17 @@ namespace SpaceCat
 {
     public class Floor
     {
-        public Building floorBuilding { get; set; }
         public int FloorNumber {get; set;}
         public string FloorBlueprintFilepath {get; set;}
+        public Building FloorBuilding { get; set; }
         public List<Area> Areas {get; set; }
 
-        //Should work, but I am sus - rh 11/5/21
-        public Floor(int floorNumber, string floorBlueprintFilepath = null, List<Area> areas = null)
+        public Floor(int floorNumber, Building floorBuilding = null, string floorBlueprintFilepath = null, List<Area> areas = null)
         {
             FloorNumber = floorNumber;
+            FloorBuilding = floorBuilding;
             FloorBlueprintFilepath = floorBlueprintFilepath;
-            if (!(areas == null)) Areas = areas;
+            if (areas != null) Areas = areas;
             else Areas = new List<Area>();
         }
 

@@ -11,20 +11,24 @@ namespace SpaceCat
         //Stores the point at the top left corner of the image relative to the location on the floor
         public Tuple<double, double> Corner { get; set; }
         //Stores the float that multiplies the width of the image when displayed
+        private double _StretchX;
         public double StretchX { 
-            get { return StretchX; }
+            get { return _StretchX; }
             set 
             {
                 if (value == 0) throw new Exception("StretchX can't be 0");
+                else _StretchX = value;
             }
         }
         //Stores the float that multiplies the height of the image when displayed
+        private double _StretchY;
         public double StretchY
         {
-            get { return StretchY; }
+            get { return _StretchY; }
             set
             {
                 if (value == 0) throw new Exception("StretchY can't be 0");
+                else _StretchY = value;
             }
         }
 

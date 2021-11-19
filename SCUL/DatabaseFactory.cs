@@ -226,7 +226,7 @@ namespace SpaceCat
                     //add parameters associated with each value
                     command.Parameters.AddWithValue("@id", areaToInsert.AreaID);
                     command.Parameters.AddWithValue("@name", areaToInsert.AreaName);
-                    command.Parameters.AddWithValue("@building", areaToInsert.AreaFloor.floorBuilding.Name);
+                    command.Parameters.AddWithValue("@building", areaToInsert.AreaFloor.FloorBuilding.Name);
                     command.Parameters.AddWithValue("@floor", areaToInsert.AreaFloor.FloorNumber);
                     command.Parameters.AddWithValue("@cap", areaToInsert.Capacity);
                     command.Parameters.AddWithValue("@category", areaToInsert.TagsToString());
