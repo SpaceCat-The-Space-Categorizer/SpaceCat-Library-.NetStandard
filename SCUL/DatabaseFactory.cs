@@ -187,7 +187,7 @@ namespace SpaceCat
                         allLines.Add(currentLine);
                     }
 
-                    string filePath = Path.Combine((GetBaseFilePath() + GetFolderName() + filename));
+                    string filePath = Path.Combine(GetBaseFilePath(), GetFolderName(), filename);
 
                     if (!(File.Exists(filePath)))
                     {
