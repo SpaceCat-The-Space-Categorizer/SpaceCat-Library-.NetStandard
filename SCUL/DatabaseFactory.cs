@@ -187,8 +187,14 @@ namespace SpaceCat
                         allLines.Add(currentLine);
                     }
 
+                    string filePath = Path.Combine((GetBaseFilePath() + GetFolderName() + filename));
+
+                    if (!(File.Exists(filePath)))
+                    {
+                        File.Create(filePath);
+                    }
                     //writes the List that has all our row data to the filename specified.
-                    File.WriteAllLines((GetBaseFilePath() + GetFolderName() + filename), allLines);
+                    File.WriteAllLines(filePath, allLines);
                 }
             }
         }
