@@ -17,7 +17,7 @@ namespace SpaceCat
             Name = accessedBuilding.Name;
             DateCreated = accessedBuilding.DateCreated;
 
-            FilePath =  Persistence.BuildPath(accessedBuilding.Name);
+            FilePath = null;
             TimeAccessed = DateTime.Now;
         }
     }

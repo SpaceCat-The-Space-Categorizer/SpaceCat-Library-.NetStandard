@@ -20,14 +20,10 @@ namespace SpaceCat
                 top_left_x = second_x;
                 bottom_right_x = first_x;
             }
-            else if (first_x < second_x)
+            else
             {
                 top_left_x = first_x;
                 bottom_right_x = second_x;
-            }
-            else if (first_x == second_x)
-            {
-                throw new Exception("Rectangle can not have identical x values");
             }
 
             if(first_y > second_y)
@@ -35,14 +31,10 @@ namespace SpaceCat
                 top_left_y = first_y;
                 bottom_right_y = second_y;
             }
-            else if(first_y < second_y)
+            else
             {
                 top_left_y = second_y;
                 bottom_right_y = first_y;
-            }
-            else if (first_y == second_y)
-            {
-                throw new Exception("Rectangle can not have identical y values");
             }
 
             TopLeft = new Tuple<double, double>(top_left_x, top_left_y);

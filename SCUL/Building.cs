@@ -6,13 +6,13 @@ namespace SpaceCat
     public class Building
     {
         //The name of the building to be surveyed
-        public string Name;
-        public DateTime DateCreated;
-        public List<Floor> Floors;
-        public List<FurnitureBlueprint> FurniturePresets;
-        public DatabaseFactory DatabaseHandler;
+        public string Name { get; set; }
+        public DateTime DateCreated { get; set; }
+        public List<Floor> Floors { get; set; }
+        public List<FurnitureBlueprint> FurniturePresets { get; set; }
+        public DatabaseFactory DatabaseHandler { get; set; }
         //exists as a cludge for survey numbers to send to DB
-        internal int SurveyNumber;
+        internal int SurveyNumber { get; set; }
 
         public Building(string name)
         {
