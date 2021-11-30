@@ -9,10 +9,11 @@ namespace SpaceCat
 {
     public static class Persistence
     {
-        public static string BaseFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SpaceCat");
+        //IF THIS CHANGES WE NEED TO REMEMBER IT CHANGED
+        public static string BaseFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SpaceCat");
         public static readonly string BuildingsFolder = Path.Combine(BaseFilePath, "Buildings");
         public static readonly string PersistenceFileLocation = Path.Combine(BaseFilePath, "persistence.json");
-
+        public static readonly string DatabaseFileLocation = Path.Combine(BaseFilePath, "database.db");
         
         public static bool ValidateEnvironment(bool repair = true)
         {
@@ -20,7 +21,7 @@ namespace SpaceCat
             try
             {
                 //Check for BasePath folder
-                Console.WriteLine("Checking for SpaceCat folder in MyDoccuments");
+                Console.WriteLine("Checking for SpaceCat folder in AppData");
                 if (!Directory.Exists(BaseFilePath))
                 {
                     isValid = false;
@@ -125,5 +126,7 @@ namespace SpaceCat
                 return null;
             }
         }
+
+
     }
 }

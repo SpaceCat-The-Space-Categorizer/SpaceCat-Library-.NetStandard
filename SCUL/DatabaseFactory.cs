@@ -13,7 +13,7 @@ namespace SpaceCat
     public class DatabaseFactory
     {
         //grabs the file path that the .exe is currently running in
-        private readonly String BaseFilePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private readonly String BaseFilePath = Persistence.BaseFilePath;
 
         //a string to be constructed as to connect to the database
         private String ConstructedFilePath;
