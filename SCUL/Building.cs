@@ -26,8 +26,9 @@ namespace SpaceCat
         }
 
         [JsonConstructor]
-        public Building(string name, DateTime dateCreated, List<Floor> floors, List<FurnitureBlueprint> furniturePresets, DatabaseFactory databaseHandler, int surveyNumber) : this(name)
+        public Building(string name, DateTime dateCreated, List<Floor> floors, List<FurnitureBlueprint> furniturePresets, DatabaseFactory databaseHandler, int surveyNumber)
         {
+            Name = name;
             DateCreated = dateCreated;
             Floors = floors;
             FurniturePresets = furniturePresets;
