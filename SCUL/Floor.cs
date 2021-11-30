@@ -10,9 +10,10 @@ namespace SpaceCat
         public string FloorBlueprintFilepath {get; set;}
         public List<Area> Areas {get; set; }
 
-        public Floor(int floorNumber, Building floorBuilding = null, string floorBlueprintFilepath = null, List<Area> areas = null)
+        public Floor(int floorNumber, string floorName, string floorBlueprintFilepath = null, List<Area> areas = null)
         {
             FloorNumber = floorNumber;
+            FloorName = floorName;
             FloorBlueprintFilepath = floorBlueprintFilepath;
             if (areas != null) Areas = areas;
             else Areas = new List<Area>();

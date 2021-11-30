@@ -47,6 +47,18 @@ namespace SpaceCat
             AdditionalNotes = null;
         }
 
+        public Area(int capacity, int areaID, string areaName, List<Rectangle> definingRectangles, string color, List<string> tags, List<Furniture> containedFurniture, string additionalNotes)
+        {
+            Capacity = capacity;
+            AreaID = areaID;
+            AreaName = areaName;
+            DefiningRectangles = definingRectangles;
+            Color = color;
+            Tags = tags;
+            ContainedFurniture = containedFurniture;
+            AdditionalNotes = additionalNotes;
+        }
+
         public void AddFurniture(Furniture furniturePiece)
         {
             Capacity += furniturePiece.Seating;
