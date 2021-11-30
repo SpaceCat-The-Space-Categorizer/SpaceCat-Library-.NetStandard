@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SpaceCat
 {
@@ -47,6 +48,7 @@ namespace SpaceCat
             AdditionalNotes = null;
         }
 
+        [JsonConstructor]
         public Area(int capacity, int areaID, string areaName, List<Rectangle> definingRectangles, string color, List<string> tags, List<Furniture> containedFurniture, string additionalNotes)
         {
             Capacity = capacity;

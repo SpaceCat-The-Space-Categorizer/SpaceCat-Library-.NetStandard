@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SpaceCat
 {
@@ -22,6 +23,16 @@ namespace SpaceCat
             FurniturePresets = new List<FurnitureBlueprint>();
             DatabaseHandler = new DatabaseFactory(name);
             SurveyNumber = 0;
+        }
+
+        [JsonConstructor]
+        public Building(string name, DateTime dateCreated, List<Floor> floors, List<FurnitureBlueprint> furniturePresets, DatabaseFactory databaseHandler, int surveyNumber) : this(name)
+        {
+            DateCreated = dateCreated;
+            Floors = floors;
+            FurniturePresets = furniturePresets;
+            DatabaseHandler = databaseHandler;
+            SurveyNumber = surveyNumber;
         }
 
         public void AddFloor(Floor newFloor)

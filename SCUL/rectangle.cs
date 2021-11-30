@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SpaceCat
@@ -41,6 +42,7 @@ namespace SpaceCat
             BottomRight = new Tuple<double, double>(bottom_right_x, bottom_right_y);
         }
 
+        [JsonConstructor]
         public Rectangle(Tuple<double, double> topLeft, Tuple<double, double> bottomRight)
         {
             TopLeft = topLeft;
