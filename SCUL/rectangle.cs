@@ -40,5 +40,11 @@ namespace SpaceCat
             TopLeft = new Tuple<double, double>(top_left_x, top_left_y);
             BottomRight = new Tuple<double, double>(bottom_right_x, bottom_right_y);
         }
+
+        public Rectangle(Tuple<double, double> topLeft, Tuple<double, double> bottomRight)
+        {
+            TopLeft = topLeft;
+            BottomRight = bottomRight;
+        }
     }
 }
