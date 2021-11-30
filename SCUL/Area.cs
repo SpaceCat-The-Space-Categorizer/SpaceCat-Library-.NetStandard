@@ -5,8 +5,6 @@ namespace SpaceCat
 {
     public class Area
     {
-        //Stores the floor the area is contained in
-        public Floor AreaFloor { get; set; }
         //The total number of seats in this area
         public int Capacity { get; set; }
         //The unique ID of the area
@@ -27,7 +25,6 @@ namespace SpaceCat
 
         public Area()
         {
-            AreaFloor = null;
             Capacity = 0;
             AreaID = 0;
             AreaName = null;
@@ -40,7 +37,6 @@ namespace SpaceCat
 
         public Area(string color)
         {
-            AreaFloor = null;
             Capacity = 0;
             AreaID = 0;
             AreaName = null;

@@ -27,13 +27,11 @@ namespace SpaceCat
         public void AddFloor(Floor newFloor)
         {
             Floors.Add(newFloor);
-            newFloor.FloorBuilding = this;
         }
 
         public void RemoveFloor(Floor removedFloor)
         {
             Floors.Remove(removedFloor);
-            removedFloor.FloorBuilding = null;
         }
 
         public void AddFurniturePreset(FurnitureBlueprint newPreset)
@@ -52,7 +50,7 @@ namespace SpaceCat
             {
                 foreach (Area floorArea in buildingFloor.Areas)
                 {
-                    DatabaseHandler.InsertArea(floorArea);
+                    DatabaseHandler.InsertArea(floorArea, buildingFloor, this);
                 }
             }
 
