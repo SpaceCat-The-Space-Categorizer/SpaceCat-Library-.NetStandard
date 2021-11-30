@@ -13,7 +13,7 @@ namespace SpaceCat
         public List<FurnitureBlueprint> FurniturePresets { get; set; }
         public DatabaseFactory DatabaseHandler { get; set; }
         //exists as a cludge for survey numbers to send to DB
-        internal int SurveyNumber { get; set; }
+        public int SurveyNumber { get; set; }
 
         public Building(string name)
         {
