@@ -242,7 +242,7 @@ namespace SpaceCat
 
                     if (!(File.Exists(filePath)))
                     {
-                        File.Create(filePath);
+                        File.Create(filePath).Close();
                     }
                     //writes the List that has all our row data to the filename specified.
                     File.WriteAllLines(filePath, allLines);
