@@ -58,25 +58,6 @@ namespace SpaceCat
                     command.Prepare();
                     command.ExecuteNonQuery();
 
-                    command.Parameters.AddWithValue("@id", 15);
-                    command.Parameters.AddWithValue("@name", "FishBoner");
-                    command.Parameters.AddWithValue("@building", "LIB");
-                    command.Parameters.AddWithValue("@floor", 02);
-                    command.Parameters.AddWithValue("@cap", 50);
-                    command.Parameters.AddWithValue("@category", "Group Study");
-                    command.Prepare();
-                    command.ExecuteNonQuery();
-
-                    //command.CommandText = @"UPDATE Area
-                    //                    SET Id = 15"+
-                    //                    @",   Name = 'FishBoner" +
-                    //                    @"',  Building = 'LIBtard"+
-                    //                    @"',  Floor = 420"+
-                    //                    @",   MaxCap = 69"+
-                    //                    @",   Category = 'dickbutt"+
-                    //                    @"'   WHERE Id = 15";
-                    //command.ExecuteNonQuery();
-
                     Console.WriteLine("row inserted");
 
                     String temp = DateTime.Today.ToString();

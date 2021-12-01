@@ -17,54 +17,50 @@ namespace SpaceCat
 
         //a string to be constructed as to connect to the database
         private string _ConstructedFilePath;
-        public string ConstructedFilePath
-        {
-            get
+        public string ConstructedFilePath { get; set; }
+        
+        public string BuildFullPath(string dbName) { 
+
+            //simple check to see if there is a file extension in filename and remove it
+            if (dbName.Contains('.'))
             {
-                return _ConstructedFilePath;
+                String[] temp = dbName.Split('.');
+                dbName = temp[0];
             }
-            set
+
+            //add .db file extension to our file name
+            dbName += ".db";
+
+            //construct a temporary path to construct the directory, if not already created
+            string tempPath = Path.Combine(BaseFilePath, FolderName);
+
+            //add the filename to the previously created path string
+            //also the plaintext string @"URI=file" must be in there otherwise
+            //the SQLiteConnection will fail to open.
+            string returnString = @"URI=file:" + tempPath + dbName;
+
+            //checks to see if .db file exists, and if not creates one
+            if (!File.Exists(_ConstructedFilePath))
             {
-                //simple check to see if there is a file extension in filename and remove it
-                if (value.Contains('.'))
+                //checks to see if directory exists, and if not creates one
+                if (!Directory.Exists(tempPath))
                 {
-                    String[] temp = value.Split('.');
-                    value = temp[0];
+                    //create directory
+                    Directory.CreateDirectory(tempPath);
                 }
 
-                //add .db file extension to our file name
-                value += ".db";
-
-                //construct a temporary path to construct the directory, if not already created
-                string tempPath = Path.Combine(GetBaseFilePath(), GetFolderName());
-
-                //add the filename to the previously created path string
-                //also the plaintext string @"URI=file" must be in there otherwise
-                //the SQLiteConnection will fail to open.
-                _ConstructedFilePath = @"URI=file:" + tempPath + value;
-
-                //checks to see if .db file exists, and if not creates one
-                if (!File.Exists(_ConstructedFilePath))
-                {
-                    //checks to see if directory exists, and if not creates one
-                    if (!Directory.Exists(tempPath))
-                    {
-                        //create directory
-                        Directory.CreateDirectory(tempPath);
-                    }
-
-                    //create file at specified filepath in connectionString
-                    SQLiteConnection.CreateFile(tempPath + value);
-                    Console.WriteLine("New File has been created.");
-                }
-                else
-                {
-                    Console.WriteLine("File has already been created.");
-                }
-                ConstructedFilePath += ";foreign keys=true;";
-                Console.WriteLine(value + " is the file selected.");
+                //create file at specified filepath in connectionString
+                SQLiteConnection.CreateFile(tempPath + dbName);
+                Console.WriteLine("New File has been created.");
             }
-        }
+            else
+            {
+                Console.WriteLine("File has already been created.");
+            }
+            ConstructedFilePath += ";foreign keys=true;";
+            Console.WriteLine(dbName + " is the file selected.");
+            return returnString;
+            }
 
         //the name of the folder to be used for the databases
         //will be located in the same folder as the .exe
@@ -78,7 +74,7 @@ namespace SpaceCat
         //takes a filename as a string and creates the connection string and the tables.
         public DatabaseFactory(String filename, bool mode = false)
         {
-            ConstructedFilePath = filename;
+            ConstructedFilePath = BuildFullPath(filename);
             CreateTables(mode);
         }
 
