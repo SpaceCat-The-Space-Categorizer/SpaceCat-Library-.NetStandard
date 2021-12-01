@@ -83,6 +83,7 @@ namespace SpaceCat
             {
                 ConstructedFilePath = BuildFullPath(constructedFilePath);
             }
+            CreateTables(false);
         }
 
         public void AverageData(string filename)
