@@ -258,7 +258,7 @@ namespace SpaceCat
 
                 using (var command = new SQLiteCommand(connection))
                 {
-                    command.CommandText = "INSERT INTO AreaSurvey(AreaSurveyed, Date, SurveyNum, FilledSeats, Notes) VALUES (@areaSurveyed, @date, @surveyNum, @filledSeats. @notes)";
+                    command.CommandText = "INSERT INTO AreaSurvey(AreaSurveyed, Date, SurveyNum, FilledSeats, Notes) VALUES (@areaSurveyed, @date, @surveyNum, @filledSeats, @notes)";
 
                     command.Parameters.AddWithValue("@areaSurveyed", surveyToInsert.AreaID);
                     command.Parameters.AddWithValue("@date", surveyToInsert.TimeSurveyed);

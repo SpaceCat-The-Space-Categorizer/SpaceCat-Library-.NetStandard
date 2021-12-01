@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text.Json.Serialization;
 
 namespace SpaceCat
@@ -83,16 +84,31 @@ namespace SpaceCat
         //This should preserve the map for use in future surveys
         public void CompleteSurvey()
         {
-            SurveyNumber = DatabaseHandler.GetNewSurveyNumber();
+            try
+            {
+                SurveyNumber = DatabaseHandler.GetNewSurveyNumber();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error is occurring in GetNewSurveyNumber.");
+                Debug.WriteLine(e);
+            }
             foreach(Floor buildingFloor in Floors)
             {
                 foreach(Area floorArea in buildingFloor.Areas)
                 {
-                    DatabaseHandler.InsertAreaSurvey(floorArea.GetSurveyData(SurveyNumber));
+                    try
+                    {
+                        DatabaseHandler.InsertAreaSurvey(floorArea.GetSurveyData(SurveyNumber));
+                    }
+                    catch(Exception e)
+                    {
+                        Debug.WriteLine("Error is occurring in InsertAreaSurvey.");
+                        Debug.WriteLine(e);
+                    }
                     floorArea.ClearSurveyData();
                 }
             }
-            SurveyNumber++;
         }
     }
 }
