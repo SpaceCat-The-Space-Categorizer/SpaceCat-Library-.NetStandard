@@ -70,7 +70,7 @@ namespace SpaceCat
                     }
                     else
                     {
-                        //todo
+                        DatabaseHandler.ModifyArea(floorArea, buildingFloor, this);
                     }
                 }
             }

@@ -226,6 +226,29 @@ namespace SpaceCat
             }
         }
 
+        public void ModifyArea(Area areaToModify, Floor areaFloor, Building areaBuilding)
+        {
+            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            {
+                connection.Open();
+
+                //create a SQLiteCommand that uses parameter values with which to associate with
+                //this helps prevent against SQLinjection into the server
+                using (var command = new SQLiteCommand(connection))
+                {
+                    command.CommandText = @"UPDATE Area
+                                            SET Id = " + areaToModify.AreaID +
+                                            @",   Name = '" + areaToModify.AreaName +
+                                            @"',  Building = '" + areaBuilding.Name +
+                                            @"',  Floor = " + areaFloor.FloorNumber +
+                                            @",   MaxCap = " + areaToModify.Capacity +
+                                            @",   Category = '" + areaToModify.TagsToString() +
+                                            @"'   WHERE Id = " + areaToModify.AreaID;
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void InsertAreaSurvey(AreaSurvey surveyToInsert)
         {
 

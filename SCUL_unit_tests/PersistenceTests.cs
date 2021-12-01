@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using System.IO;
 using System.Text.Json;
 
 namespace SpaceCat.Testing
@@ -30,6 +31,14 @@ namespace SpaceCat.Testing
             loadedBuilding = Persistence.LoadBuilding("test");
 
             Assert.AreSame(savedBuilding, loadedBuilding);
+        }
+
+        [Test]
+        public void DatabaseInsert()
+        {
+            Building testBuilding = new("Testicles");
+            string filePath = @"URI=file:" + Path.Combine(Persistence.BaseFilePath, "Databases", "Testicles.db");
+            DatabaseTests.PopulationTestArea(filePath);
         }
     }
 }

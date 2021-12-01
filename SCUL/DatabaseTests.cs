@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace SpaceCat
 {
-    class DatabaseTests
+    public static class DatabaseTests
     {
-        public void populationTestArea(String filepath)
+        public static void PopulationTestArea(String filepath)
         {
             //creates a SQLiteConnection using the c# 'using' syntax
             //this means that I don't have to call a close/dispose method, as it will do it for me
@@ -58,8 +58,26 @@ namespace SpaceCat
                     command.Prepare();
                     command.ExecuteNonQuery();
 
-                    Console.WriteLine("row inserted");
+                    command.Parameters.AddWithValue("@id", 15);
+                    command.Parameters.AddWithValue("@name", "FishBoner");
+                    command.Parameters.AddWithValue("@building", "LIB");
+                    command.Parameters.AddWithValue("@floor", 02);
+                    command.Parameters.AddWithValue("@cap", 50);
+                    command.Parameters.AddWithValue("@category", "Group Study");
+                    command.Prepare();
+                    command.ExecuteNonQuery();
 
+                    //command.CommandText = @"UPDATE Area
+                    //                    SET Id = 15"+
+                    //                    @",   Name = 'FishBoner" +
+                    //                    @"',  Building = 'LIBtard"+
+                    //                    @"',  Floor = 420"+
+                    //                    @",   MaxCap = 69"+
+                    //                    @",   Category = 'dickbutt"+
+                    //                    @"'   WHERE Id = 15";
+                    //command.ExecuteNonQuery();
+
+                    Console.WriteLine("row inserted");
 
                     String temp = DateTime.Today.ToString();
 
@@ -167,7 +185,7 @@ namespace SpaceCat
         }
 
         //basic selection test that selects all rows from the Area table
-        public void selectionTestArea(String filepath)
+        public static void SelectionTestArea(String filepath)
         {
             //creates a SQLiteConnection using the c# 'using' syntax
             //this means that I don't have to call a close/dispose method, as it will do it for me
