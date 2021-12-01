@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Diagnostics;
 
 namespace SpaceCat
 {
@@ -505,7 +505,16 @@ namespace SpaceCat
                     }
                     else
                     {
-                        return (int)newSurveyNum + 1;
+                        try
+                        {
+                            return Convert.ToInt32(newSurveyNum) + 1;
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.WriteLine("Error getting new survey number");
+                            Debug.WriteLine(e);
+                            return -1;
+                        }
                     }
                 }
             }
@@ -529,7 +538,16 @@ namespace SpaceCat
                     }
                     else
                     {
-                        return (int)newAreaId + 1;
+                        try
+                        {
+                            return Convert.ToInt32(newAreaId) + 1;
+                        }
+                        catch(Exception e)
+                        {
+                            Debug.WriteLine("Error getting new AreaID");
+                            Debug.WriteLine(e);
+                            return -1;
+                        }
                     }
                 }
             }
