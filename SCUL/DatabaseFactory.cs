@@ -493,7 +493,15 @@ namespace SpaceCat
 
                     command.CommandText = @"SELECT MAX(SurveyNum) FROM AreaSurvey";
 
-                    return (int)command.ExecuteScalar() + 1;
+                    var newSurveyNum = command.ExecuteScalar();
+                    if (newSurveyNum == DBNull.Value)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return (int)newSurveyNum + 1;
+                    }
                 }
             }
         }
@@ -509,7 +517,15 @@ namespace SpaceCat
 
                     command.CommandText = @"SELECT MAX(Id) FROM Area";
 
-                    return (int)command.ExecuteScalar() + 1;
+                    var newAreaId = command.ExecuteScalar();
+                    if (newAreaId == DBNull.Value)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return (int)newAreaId + 1;
+                    }
                 }
             }
         }
