@@ -65,6 +65,21 @@ namespace SpaceCat
                     }
                 }
                 else { Console.WriteLine("Persistence file found."); }
+
+                //Check for recent buildings file
+                Console.WriteLine("Checking for recent buildings file.");
+                if (!File.Exists(RecentBuildingsFileLocation))
+                {
+                    Console.WriteLine("Could not find recent buildings file.");
+                    isValid = false;
+                    if (repair)
+                    {
+                        Console.WriteLine("Creating recent buildings file.");
+                        File.Create(RecentBuildingsFileLocation);
+                        isValid = true;
+                    }
+                }
+                else { Console.WriteLine("Recent buildings file found."); }
             }
             catch (Exception e)
             {
