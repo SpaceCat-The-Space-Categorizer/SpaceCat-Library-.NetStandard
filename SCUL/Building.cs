@@ -90,7 +90,7 @@ namespace SpaceCat
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Constructed file path is: " + DatabaseHandler.GetConstructedFilePath());
+                Debug.WriteLine("Constructed file path is: " + DatabaseHandler.ConstructedFilePath);
                 Debug.WriteLine("Error is occurring in GetNewSurveyNumber.");
                 Debug.WriteLine(e);
             }
@@ -104,7 +104,7 @@ namespace SpaceCat
                     }
                     catch(Exception e)
                     {
-                        Debug.WriteLine("Constructed file path is: " + DatabaseHandler.GetConstructedFilePath());
+                        Debug.WriteLine("Constructed file path is: " + DatabaseHandler.ConstructedFilePath);
                         Debug.WriteLine("Error is occurring in InsertAreaSurvey.");
                         Debug.WriteLine(e);
                     }

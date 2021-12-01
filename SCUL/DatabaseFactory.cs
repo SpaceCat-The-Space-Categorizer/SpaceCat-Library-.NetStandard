@@ -16,7 +16,55 @@ namespace SpaceCat
         private readonly String BaseFilePath = Persistence.BaseFilePath;
 
         //a string to be constructed as to connect to the database
-        private String ConstructedFilePath;
+        private string _ConstructedFilePath;
+        public string ConstructedFilePath
+        {
+            get
+            {
+                return _ConstructedFilePath;
+            }
+            set
+            {
+                //simple check to see if there is a file extension in filename and remove it
+                if (value.Contains('.'))
+                {
+                    String[] temp = value.Split('.');
+                    value = temp[0];
+                }
+
+                //add .db file extension to our file name
+                value += ".db";
+
+                //construct a temporary path to construct the directory, if not already created
+                string tempPath = Path.Combine(GetBaseFilePath(), GetFolderName());
+
+                //add the filename to the previously created path string
+                //also the plaintext string @"URI=file" must be in there otherwise
+                //the SQLiteConnection will fail to open.
+                _ConstructedFilePath = @"URI=file:" + tempPath + value;
+
+                //checks to see if .db file exists, and if not creates one
+                if (!File.Exists(_ConstructedFilePath))
+                {
+                    //checks to see if directory exists, and if not creates one
+                    if (!Directory.Exists(tempPath))
+                    {
+                        //create directory
+                        Directory.CreateDirectory(tempPath);
+                    }
+
+                    //create file at specified filepath in connectionString
+                    SQLiteConnection.CreateFile(tempPath + value);
+                    Console.WriteLine("New File has been created.");
+                }
+                else
+                {
+                    Console.WriteLine("File has already been created.");
+                }
+                ConstructedFilePath += ";foreign keys=true;";
+                Console.WriteLine(value + " is the file selected.");
+            }
+        }
 
         //the name of the folder to be used for the databases
         //will be located in the same folder as the .exe
@@ -28,12 +76,17 @@ namespace SpaceCat
 
         //constructor that will see most use.
         //takes a filename as a string and creates the connection string and the tables.
-        public DatabaseFactory(String filename)
+        public DatabaseFactory(String filename, bool mode = false)
         {
-            SetConstructedFilePath(filename);
-            CreateTables(false);
+            ConstructedFilePath = filename;
+            CreateTables(mode);
         }
 
+        [JsonSerializer]
+        public DatabaseFactory(string constructedFilePath)
+        {
+            ConstructedFilePath = constructedFilePath;
+        }
 
         public void AverageData(string filename)
         {
@@ -54,7 +107,7 @@ namespace SpaceCat
             filename += ".csv";
 
             //creates a SQLiteConnection using the c# 'using' syntax
-            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            using (var connection = new SQLiteConnection(ConstructedFilePath))
             {
                 connection.Open();
 
@@ -115,7 +168,7 @@ namespace SpaceCat
 
             //creates a SQLiteConnection using the c# 'using' syntax
             //this means that I don't have to call a close/dispose method, as it will do it for me 
-            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            using (var connection = new SQLiteConnection(ConstructedFilePath))
             {
                 connection.Open();
 
@@ -203,7 +256,7 @@ namespace SpaceCat
         {
             //creates a SQLiteConnection using the c# 'using' syntax
             //this means that I don't have to call a close/dispose method, as it will do it for me
-            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            using (var connection = new SQLiteConnection(ConstructedFilePath))
             {
                 connection.Open();
 
@@ -228,7 +281,7 @@ namespace SpaceCat
 
         public void ModifyArea(Area areaToModify, Floor areaFloor, Building areaBuilding)
         {
-            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            using (var connection = new SQLiteConnection(ConstructedFilePath))
             {
                 connection.Open();
 
@@ -252,7 +305,7 @@ namespace SpaceCat
         public void InsertAreaSurvey(AreaSurvey surveyToInsert)
         {
 
-            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            using (var connection = new SQLiteConnection(ConstructedFilePath))
             {
                 connection.Open();
 
@@ -276,7 +329,7 @@ namespace SpaceCat
         {
             //creates a SQLiteConnection using the c# 'using' syntax
             //this means that I don't have to call a close/dispose method, as it will do it for me
-            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            using (var connection = new SQLiteConnection(ConstructedFilePath))
             {
 
                 //open the connection
@@ -302,7 +355,7 @@ namespace SpaceCat
         {
             //creates a SQLiteConnection using the c# 'using' syntax
             //this means that I don't have to call a close/dispose method, as it will do it for me
-            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            using (var connection = new SQLiteConnection(ConstructedFilePath))
             {
 
                 //open the connection
@@ -344,7 +397,7 @@ namespace SpaceCat
 
             //creates a SQLiteConnection using the c# 'using' syntax
             //this means that I don't have to call a close/dispose method, as it will do it for me
-            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            using (var connection = new SQLiteConnection(ConstructedFilePath))
             {
 
                 //open the connection
@@ -391,7 +444,7 @@ namespace SpaceCat
 
             //creates a SQLiteConnection using the c# 'using' syntax
             //this means that I don't have to call a close/dispose method, as it will do it for me
-            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            using (var connection = new SQLiteConnection(ConstructedFilePath))
             {
 
                 //open the connection
@@ -440,51 +493,11 @@ namespace SpaceCat
 
         //setter for connectionString
         //its really more of a constructor
-        public void SetConstructedFilePath(string filename)
-        {
-            //simple check to see if there is a file extension in filename and remove it
-            if (filename.Contains('.'))
-            {
-                String[] temp = filename.Split('.');
-                filename = temp[0];
-            }
-
-            //add .db file extension to our file name
-            filename += ".db";
-
-            //construct a temporary path to construct the directory, if not already created
-            string tempPath = Path.Combine(GetBaseFilePath(), GetFolderName());
-
-            //add the filename to the previously created path string
-            //also the plaintext string @"URI=file" must be in there otherwise
-            //the SQLiteConnection will fail to open.
-            ConstructedFilePath = @"URI=file:" + tempPath + filename;
-
-            //checks to see if .db file exists, and if not creates one
-            if (!File.Exists(GetConstructedFilePath()))
-            {
-                //checks to see if directory exists, and if not creates one
-                if (!Directory.Exists(tempPath))
-                {
-                    //create directory
-                    Directory.CreateDirectory(tempPath);
-                }
-
-                //create file at specified filepath in connectionString
-                SQLiteConnection.CreateFile(tempPath + filename);
-                Console.WriteLine("New File has been created.");
-            }
-            else
-            {
-                Console.WriteLine("File has already been created.");
-            }
-            ConstructedFilePath += ";foreign keys=true;";
-            Console.WriteLine(filename + " is the file selected.");
-        }
+        
 
         public int GetNewSurveyNumber()
         {
-            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            using (var connection = new SQLiteConnection(ConstructedFilePath))
             {
                 connection.Open();
 
@@ -508,7 +521,7 @@ namespace SpaceCat
 
         public int GetNewAreaID()
         {
-            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            using (var connection = new SQLiteConnection(ConstructedFilePath))
             {
                 connection.Open();
 
@@ -528,12 +541,6 @@ namespace SpaceCat
                     }
                 }
             }
-        }
-
-        //basic getter for connectionString
-        public String GetConstructedFilePath()
-        {
-            return ConstructedFilePath;
         }
 
         //basic getter for baseString
