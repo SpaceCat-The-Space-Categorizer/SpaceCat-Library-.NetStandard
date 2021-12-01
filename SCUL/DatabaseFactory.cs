@@ -60,7 +60,7 @@ namespace SpaceCat
             ConstructedFilePath += ";foreign keys=true;";
             Console.WriteLine(dbName + " is the file selected.");
             return returnString;
-            }
+        }
 
         //the name of the folder to be used for the databases
         //will be located in the same folder as the .exe
@@ -72,16 +72,17 @@ namespace SpaceCat
 
         //constructor that will see most use.
         //takes a filename as a string and creates the connection string and the tables.
-        public DatabaseFactory(String filename, bool mode = false)
-        {
-            ConstructedFilePath = BuildFullPath(filename);
-            CreateTables(mode);
-        }
-
         [JsonSerializer]
         public DatabaseFactory(string constructedFilePath)
         {
-            ConstructedFilePath = constructedFilePath;
+            if (constructedFilePath.Contains("URI"))
+            {
+                ConstructedFilePath = constructedFilePath;
+            }
+            else
+            {
+                ConstructedFilePath = BuildFullPath(constructedFilePath);
+            }
         }
 
         public void AverageData(string filename)

@@ -30,6 +30,7 @@ namespace SpaceCat.Testing
             Persistence.SaveBuilding(savedBuilding);
             loadedBuilding = Persistence.LoadBuilding("test");
 
+            Console.WriteLine(savedBuilding.DatabaseHandler.ConstructedFilePath);
             Console.WriteLine(loadedBuilding.DatabaseHandler.ConstructedFilePath);
 
             Assert.Pass();
