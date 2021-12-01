@@ -27,7 +27,7 @@ namespace SpaceCat
         public Area()
         {
             Capacity = 0;
-            AreaID = 0;
+            AreaID = -1;
             AreaName = null;
             DefiningRectangles = new List<Rectangle>();
             Color = "000000";
@@ -39,7 +39,7 @@ namespace SpaceCat
         public Area(string color)
         {
             Capacity = 0;
-            AreaID = 0;
+            AreaID = -1;
             AreaName = null;
             DefiningRectangles = new List<Rectangle>();
             Color = color;

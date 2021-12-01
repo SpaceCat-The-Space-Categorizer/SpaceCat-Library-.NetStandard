@@ -14,6 +14,7 @@ namespace SpaceCat
         public DatabaseFactory DatabaseHandler { get; set; }
         //exists as a cludge for survey numbers to send to DB
         public int SurveyNumber { get; set; }
+        public string AdditionalNotes { get; set; }
 
         public Building(string name)
         {
@@ -62,8 +63,15 @@ namespace SpaceCat
             {
                 foreach (Area floorArea in buildingFloor.Areas)
                 {
-                    floorArea.AreaID = DatabaseHandler.GetNewAreaID();
-                    DatabaseHandler.InsertArea(floorArea, buildingFloor, this);
+                    if (floorArea.AreaID == -1)
+                    {
+                        floorArea.AreaID = DatabaseHandler.GetNewAreaID();
+                        DatabaseHandler.InsertArea(floorArea, buildingFloor, this);
+                    }
+                    else
+                    {
+                        //todo
+                    }
                 }
             }
 
