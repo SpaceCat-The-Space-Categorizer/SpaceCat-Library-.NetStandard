@@ -358,9 +358,9 @@ namespace SpaceCat
                     //create table area with varying attributes
                     //no need to put id attribute in insert statements seeing as it auto increments
                     command.CommandText = @"CREATE TABLE Area(  Id INT NOT NULL PRIMARY KEY,
-                                                        Name VARCHAR(30) NOT NULL,
-                                                        Building VARCHAR(30) NOT NULL,
-                                                        Floor INT NOT NULL,
+                                                        Name VARCHAR(30),
+                                                        Building VARCHAR(30),
+                                                        Floor INT,
                                                         MaxCap INT,
                                                         Category VARCHAR(30))";
                     command.ExecuteNonQuery();
@@ -369,9 +369,9 @@ namespace SpaceCat
                     //create table area with varying attributes
                     //no need to put id attribute in insert statements seeing as it auto increments
                     command.CommandText = @"CREATE TABLE AreaSurvey(AreaSurveyed INT NOT NULL,
-                                                            Date DATE NOT NULL,
-                                                            SurveyNum INT NOT NULL,
-                                                            FilledSeats INT NOT NULL,
+                                                            Date DATE,
+                                                            SurveyNum INT,
+                                                            FilledSeats INT,
                                                             Notes VARCHAR(300),
                                                             PRIMARY KEY(AreaSurveyed, Date, SurveyNum),
                                                             FOREIGN KEY(AreaSurveyed)
