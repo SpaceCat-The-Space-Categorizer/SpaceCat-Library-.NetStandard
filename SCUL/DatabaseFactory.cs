@@ -16,7 +16,6 @@ namespace SpaceCat
         private readonly String BaseFilePath = Persistence.BaseFilePath;
 
         //a string to be constructed as to connect to the database
-        private string _ConstructedFilePath;
         public string ConstructedFilePath { get; set; }
         
         public string BuildFullPath(string dbName) { 
@@ -40,7 +39,7 @@ namespace SpaceCat
             string returnString = @"URI=file:" + tempPath + dbName;
 
             //checks to see if .db file exists, and if not creates one
-            if (!File.Exists(_ConstructedFilePath))
+            if (!File.Exists(ConstructedFilePath))
             {
                 //checks to see if directory exists, and if not creates one
                 if (!Directory.Exists(tempPath))
@@ -238,13 +237,7 @@ namespace SpaceCat
                         allLines.Add(currentLine);
                     }
 
-                    string filePath = Path.Combine(GetBaseFilePath(), GetFolderName(), filename);
-
-                    if (!(File.Exists(filePath)))
-                    {
-                        var newFile = File.Create(filePath);
-                        newFile.Close();
-                    }
+                    string filePath = Path.Combine(BaseFilePath, FolderName, filename);
                     //writes the List that has all our row data to the filename specified.
                     File.WriteAllLines(filePath, allLines);
                 }
