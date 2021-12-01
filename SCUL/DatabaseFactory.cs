@@ -13,7 +13,7 @@ namespace SpaceCat
     public class DatabaseFactory
     {
         //grabs the file path that the .exe is currently running in
-        private readonly String BaseFilePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private readonly String BaseFilePath = Persistence.BaseFilePath;
 
         //a string to be constructed as to connect to the database
         private String ConstructedFilePath;
@@ -199,23 +199,7 @@ namespace SpaceCat
             }
         }
 
-        public void InsertBuildingAreas(Building buildingToInsert)
-        {
-            foreach(Floor floorToInsert in buildingToInsert.Floors)
-            {
-                InsertFloor(floorToInsert);
-            }
-        }
-
-        public void InsertFloor(Floor floorToInsert)
-        {
-            foreach(Area areaToInsert in floorToInsert.Areas)
-            {
-                InsertArea(areaToInsert);
-            }
-        }
-
-        public void InsertArea(Area areaToInsert)
+        public void InsertArea(Area areaToInsert, Floor areaFloor, Building areaBuilding)
         {
             //creates a SQLiteConnection using the c# 'using' syntax
             //this means that I don't have to call a close/dispose method, as it will do it for me
@@ -232,8 +216,8 @@ namespace SpaceCat
                     //add parameters associated with each value
                     command.Parameters.AddWithValue("@id", areaToInsert.AreaID);
                     command.Parameters.AddWithValue("@name", areaToInsert.AreaName);
-                    command.Parameters.AddWithValue("@building", areaToInsert.AreaFloor.FloorBuilding.Name);
-                    command.Parameters.AddWithValue("@floor", areaToInsert.AreaFloor.FloorNumber);
+                    command.Parameters.AddWithValue("@building", areaBuilding.Name);
+                    command.Parameters.AddWithValue("@floor", areaFloor.FloorNumber);
                     command.Parameters.AddWithValue("@cap", areaToInsert.Capacity);
                     command.Parameters.AddWithValue("@category", areaToInsert.TagsToString());
                     command.Prepare();

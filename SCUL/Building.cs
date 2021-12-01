@@ -1,18 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SpaceCat
 {
     public class Building
     {
         //The name of the building to be surveyed
-        public string Name;
-        public DateTime DateCreated;
-        public List<Floor> Floors;
-        public List<FurnitureBlueprint> FurniturePresets;
-        public DatabaseFactory DatabaseHandler;
+        public string Name { get; set; }
+        public DateTime DateCreated { get; set; }
+        public List<Floor> Floors { get; set; }
+        public List<FurnitureBlueprint> FurniturePresets { get; set; }
+        public DatabaseFactory DatabaseHandler { get; set; }
         //exists as a cludge for survey numbers to send to DB
-        internal int SurveyNumber;
+        public int SurveyNumber { get; set; }
 
         public Building(string name)
         {
@@ -24,16 +25,25 @@ namespace SpaceCat
             SurveyNumber = 0;
         }
 
+        [JsonConstructor]
+        public Building(string name, DateTime dateCreated, List<Floor> floors, List<FurnitureBlueprint> furniturePresets, DatabaseFactory databaseHandler, int surveyNumber)
+        {
+            Name = name;
+            DateCreated = dateCreated;
+            Floors = floors;
+            FurniturePresets = furniturePresets;
+            DatabaseHandler = databaseHandler;
+            SurveyNumber = surveyNumber;
+        }
+
         public void AddFloor(Floor newFloor)
         {
             Floors.Add(newFloor);
-            newFloor.FloorBuilding = this;
         }
 
         public void RemoveFloor(Floor removedFloor)
         {
             Floors.Remove(removedFloor);
-            removedFloor.FloorBuilding = null;
         }
 
         public void AddFurniturePreset(FurnitureBlueprint newPreset)
@@ -52,7 +62,7 @@ namespace SpaceCat
             {
                 foreach (Area floorArea in buildingFloor.Areas)
                 {
-                    DatabaseHandler.InsertArea(floorArea);
+                    DatabaseHandler.InsertArea(floorArea, buildingFloor, this);
                 }
             }
 

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SpaceCat
 {
     public class Area
     {
-        //Stores the floor the area is contained in
-        public Floor AreaFloor { get; set; }
         //The total number of seats in this area
         public int Capacity { get; set; }
         //The unique ID of the area
@@ -27,7 +26,6 @@ namespace SpaceCat
 
         public Area()
         {
-            AreaFloor = null;
             Capacity = 0;
             AreaID = 0;
             AreaName = null;
@@ -40,7 +38,6 @@ namespace SpaceCat
 
         public Area(string color)
         {
-            AreaFloor = null;
             Capacity = 0;
             AreaID = 0;
             AreaName = null;
@@ -49,6 +46,19 @@ namespace SpaceCat
             Tags = new List<string>();
             ContainedFurniture = new List<Furniture>();
             AdditionalNotes = null;
+        }
+
+        [JsonConstructor]
+        public Area(int capacity, int areaID, string areaName, List<Rectangle> definingRectangles, string color, List<string> tags, List<Furniture> containedFurniture, string additionalNotes)
+        {
+            Capacity = capacity;
+            AreaID = areaID;
+            AreaName = areaName;
+            DefiningRectangles = definingRectangles;
+            Color = color;
+            Tags = tags;
+            ContainedFurniture = containedFurniture;
+            AdditionalNotes = additionalNotes;
         }
 
         public void AddFurniture(Furniture furniturePiece)
