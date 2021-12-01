@@ -28,7 +28,7 @@ namespace SpaceCat
         {
             Capacity = 0;
             AreaID = -1;
-            AreaName = null;
+            AreaName = "";
             DefiningRectangles = new List<Rectangle>();
             Color = "000000";
             Tags = new List<string>();
