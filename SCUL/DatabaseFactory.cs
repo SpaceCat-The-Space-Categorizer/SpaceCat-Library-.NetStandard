@@ -130,10 +130,10 @@ namespace SpaceCat
                         while (reader.Read())
                         {
                             currentLine = $"{reader.GetString(0)}," +
-                                            $"{reader.GetInt32(1)}," +
-                                            $"{reader.GetInt32(2)}," +
+                                            $"{reader.GetInt64(1)}," +
+                                            $"{reader.GetInt64(2)}," +
                                             $"{reader.GetFloat(3)}," +
-                                            $"{reader.GetInt32(4)}";
+                                            $"{reader.GetInt64(4)}";
                             allLines.Add(currentLine);
                             Console.WriteLine(currentLine);
                         }
@@ -192,11 +192,11 @@ namespace SpaceCat
                         //while there are rows to be read, read each row, format it, and add the line to the List
                         while (reader.Read())
                         {
-                            currentLine = $"{reader.GetInt32(0)}," +
+                            currentLine = $"{reader.GetInt64(0)}," +
                                             $"{reader.GetString(1)}," +
                                             $"{reader.GetString(2)}," +
-                                            $"{reader.GetInt32(3)}," +
-                                            $"{reader.GetInt32(4)}," +
+                                            $"{reader.GetInt64(3)}," +
+                                            $"{reader.GetInt64(4)}," +
                                             $"{reader.GetString(5)}";
                             allLines.Add(currentLine);
                             Console.WriteLine(currentLine);
@@ -224,10 +224,10 @@ namespace SpaceCat
                         //while there are rows to be read, read each row, format it, and add the line to the List
                         while (reader.Read())
                         {
-                            currentLine = $"{reader.GetInt32(0)}," +
+                            currentLine = $"{reader.GetInt64(0)}," +
                                             $"{reader.GetDateTime(1)}," +
-                                            $"{reader.GetInt32(2)}," +
-                                            $"{reader.GetInt32(3)}," +
+                                            $"{reader.GetInt64(2)}," +
+                                            $"{reader.GetInt64(3)}," +
                                             $"{reader.GetString(4)}";
                             allLines.Add(currentLine);
                             Console.WriteLine(currentLine);
