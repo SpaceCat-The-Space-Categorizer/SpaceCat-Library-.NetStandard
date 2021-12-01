@@ -13,6 +13,7 @@ namespace SpaceCat
         public static string BaseFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SpaceCat");
         public static readonly string BuildingsFolder = Path.Combine(BaseFilePath, "Buildings");
         public static readonly string PersistenceFileLocation = Path.Combine(BaseFilePath, "persistence.json");
+        public static readonly string RecentBuildingsFileLocation = Path.Combine(BaseFilePath, "recentbuildings.json");
         public static readonly string DatabaseFileLocation = Path.Combine(BaseFilePath, "database.db");
         
         public static bool ValidateEnvironment(bool repair = true)
@@ -64,6 +65,21 @@ namespace SpaceCat
                     }
                 }
                 else { Console.WriteLine("Persistence file found."); }
+
+                //Check for recent buildings file
+                Console.WriteLine("Checking for recent buildings file.");
+                if (!File.Exists(RecentBuildingsFileLocation))
+                {
+                    Console.WriteLine("Could not find recent buildings file.");
+                    isValid = false;
+                    if (repair)
+                    {
+                        Console.WriteLine("Creating recent buildings file.");
+                        File.Create(RecentBuildingsFileLocation);
+                        isValid = true;
+                    }
+                }
+                else { Console.WriteLine("Recent buildings file found."); }
             }
             catch (Exception e)
             {
@@ -74,6 +90,49 @@ namespace SpaceCat
             return isValid;
         }
 
+        public static bool SaveRecentBuildings(List<RecentBuilding> recentBuildings)
+        {
+            try
+            {
+                //Prepare to write
+                string jsonString = JsonSerializer.Serialize(recentBuildings);
+                Console.WriteLine("JSON representation: " + jsonString);
+
+                //write to file
+                Console.WriteLine("Writing recent buildings to file...");
+                StreamWriter streamWriter = new StreamWriter(RecentBuildingsFileLocation);
+                streamWriter.WriteLine(jsonString);
+                streamWriter.Close();
+                Console.WriteLine("Recent Buildings Saved!");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("New exception thrown in SaveRecentBuildings() at: " + DateTime.Now);
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public static List<RecentBuilding> LoadRecentBuildings()
+        {
+            try
+            {
+                StreamReader streamReader = new StreamReader(RecentBuildingsFileLocation);
+                string jsonString = streamReader.ReadLine();
+                Console.WriteLine("json loaded: " + jsonString);
+                List<RecentBuilding> recentBuildings = JsonSerializer.Deserialize<List<RecentBuilding>>(jsonString);
+                Console.WriteLine("Recent buildings loaded.");
+                return recentBuildings;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("New exception thrown in LoadRecentBuilding() at: " + DateTime.Now);
+                Debug.WriteLine(e);
+                return new List<RecentBuilding>();
+            }
+
+        }
 
         public static bool SaveBuilding(Building buildingToSave, string fileName = null)
         {
@@ -105,7 +164,6 @@ namespace SpaceCat
             }
         }
 
-
         //Consider LoadBuildingByName and LoadBuildingByPath, or build that functionality into this 
         public static Building LoadBuilding(string fileName)
         {
@@ -126,7 +184,6 @@ namespace SpaceCat
                 return null;
             }
         }
-
 
     }
 }

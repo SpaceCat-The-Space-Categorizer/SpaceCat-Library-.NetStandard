@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace SpaceCat
 {
@@ -17,8 +19,17 @@ namespace SpaceCat
             Name = accessedBuilding.Name;
             DateCreated = accessedBuilding.DateCreated;
 
-            FilePath = null;
+            FilePath = Path.Combine(Persistence.BuildingsFolder, accessedBuilding.Name + ".json") ;
             TimeAccessed = DateTime.Now;
+        }
+
+        [JsonConstructor]
+        public RecentBuilding(string name, DateTime dateCreated, string filePath, DateTime timeAccessed)
+        {
+            Name = name;
+            DateCreated = dateCreated;
+            FilePath = filePath;
+            TimeAccessed = timeAccessed;
         }
     }
 }
