@@ -62,6 +62,7 @@ namespace SpaceCat
             {
                 foreach (Area floorArea in buildingFloor.Areas)
                 {
+                    floorArea.AreaID = DatabaseHandler.GetNewAreaID();
                     DatabaseHandler.InsertArea(floorArea, buildingFloor, this);
                 }
             }

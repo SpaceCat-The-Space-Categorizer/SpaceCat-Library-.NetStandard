@@ -468,7 +468,23 @@ namespace SpaceCat
                 using (var command = new SQLiteCommand(connection))
                 {
 
-                    command.CommandText = @"SELECT MAX(SurveyNum) from AreaSurvey";
+                    command.CommandText = @"SELECT MAX(SurveyNum) FROM AreaSurvey";
+
+                    return (int)command.ExecuteScalar() + 1;
+                }
+            }
+        }
+
+        public int GetNewAreaID()
+        {
+            using (var connection = new SQLiteConnection(GetConstructedFilePath()))
+            {
+                connection.Open();
+
+                using (var command = new SQLiteCommand(connection))
+                {
+
+                    command.CommandText = @"SELECT MAX(Id) FROM Area";
 
                     return (int)command.ExecuteScalar() + 1;
                 }
