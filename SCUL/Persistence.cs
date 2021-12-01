@@ -127,9 +127,9 @@ namespace SpaceCat
             }
             catch (Exception e)
             {
-                Debug.WriteLine("New exception thrown in LoadBuilding() at: " + DateTime.Now);
+                Debug.WriteLine("New exception thrown in LoadRecentBuilding() at: " + DateTime.Now);
                 Debug.WriteLine(e);
-                return null;
+                return new List<RecentBuilding>();
             }
 
         }
