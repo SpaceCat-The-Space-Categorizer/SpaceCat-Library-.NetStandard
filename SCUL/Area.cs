@@ -33,19 +33,19 @@ namespace SpaceCat
             Color = "000000";
             Tags = new List<string>();
             ContainedFurniture = new List<Furniture>();
-            AdditionalNotes = null;
+            AdditionalNotes = "";
         }
 
         public Area(string color)
         {
             Capacity = 0;
             AreaID = -1;
-            AreaName = null;
+            AreaName = "";
             DefiningRectangles = new List<Rectangle>();
             Color = color;
             Tags = new List<string>();
             ContainedFurniture = new List<Furniture>();
-            AdditionalNotes = null;
+            AdditionalNotes = "";
         }
 
         [JsonConstructor]

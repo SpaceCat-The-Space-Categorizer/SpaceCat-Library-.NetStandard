@@ -225,7 +225,7 @@ namespace SpaceCat
                         while (reader.Read())
                         {
                             currentLine = $"{reader.GetInt64(0)}," +
-                                            $"{reader.GetDateTime(1)}," +
+                                            $"{reader.GetString(1)}," +
                                             $"{reader.GetInt64(2)}," +
                                             $"{reader.GetInt64(3)}," +
                                             $"{reader.GetString(4)}";
@@ -306,7 +306,7 @@ namespace SpaceCat
                     command.CommandText = "INSERT INTO AreaSurvey(AreaSurveyed, Date, SurveyNum, FilledSeats, Notes) VALUES (@areaSurveyed, @date, @surveyNum, @filledSeats, @notes)";
 
                     command.Parameters.AddWithValue("@areaSurveyed", surveyToInsert.AreaID);
-                    command.Parameters.AddWithValue("@date", surveyToInsert.TimeSurveyed);
+                    command.Parameters.AddWithValue("@date", surveyToInsert.TimeSurveyed.ToString());
                     command.Parameters.AddWithValue("@surveyNum", surveyToInsert.SurveyNumber);
                     command.Parameters.AddWithValue("@filledSeats", surveyToInsert.FilledSeats);
                     command.Parameters.AddWithValue("@notes", surveyToInsert.AdditionalNotes);
